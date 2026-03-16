@@ -2,9 +2,9 @@
 
 import { z } from "zod";
 import { db } from "@/lib/db/client";
-import { jobs } from "@/lib/db/schema";
+import { jobs, teamMembers } from "@/lib/db/schema";
 import { getAuthSession } from "@/lib/auth/session";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 // --- Job validation schema ---
 const jobSchema = z.object({
@@ -19,18 +19,22 @@ export async function createJobAction(input: z.infer<typeof jobSchema>) {
   const session = await getAuthSession();
   if (!session) throw new Error("Not authenticated");
 
-  // You would load user's first team id here:
-  const teamRow = await db.query.teamMembers.findFirst({
-    where: (tm, { eq }) => eq(tm.userId, session.userId),
-  });
-  if (!teamRow) throw new Error("No team found");
+  // Find the user's team using Drizzle select/where pattern
+  const [teamRow] = await db
+    .select({ teamId: teamMembers.teamId })
+    .from(teamMembers)
+    .where(eq(teamMembers.userId, session.userId))
+    .limit(1);
+
+  if (!teamRow || !teamRow.teamId) throw new Error("No team found");
 
   const result = await db.insert(jobs).values({
     ...input,
     teamId: teamRow.teamId,
   });
 
-  return { success: true, jobId: result.insertId };
+  // You may need to adjust this depending on how Drizzle returns inserted row ids
+  return { success: true, jobId: result?.insertId || undefined };
 }
 
 export async function updateJobAction(jobId: string, input: z.infer<typeof jobSchema>) {
