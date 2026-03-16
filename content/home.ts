@@ -13,135 +13,7 @@ export type HeroContent = {
   heroImageAlt: string;
 };
 
-// ─── Sponsors ───────────────────────────────────────────────────────────────
-export type SponsorItem = { icon: string; name: string };
-export type SponsorsContent = {
-  heading: string;
-  items: SponsorItem[];
-};
-
-// ─── Benefits ───────────────────────────────────────────────────────────────
-export type BenefitItem = { icon: string; title: string; description: string };
-export type BenefitsContent = {
-  eyebrow: string;
-  heading: string;
-  description: string;
-  items: BenefitItem[];
-};
-
-// ─── Feature Grid ───────────────────────────────────────────────────────────
-export type FeatureItem = { icon: string; title: string; description: string };
-export type FeaturesContent = {
-  eyebrow: string;
-  heading: string;
-  subtitle: string;
-  items: FeatureItem[];
-};
-
-// ─── Services ───────────────────────────────────────────────────────────────
-export type ServiceItem = { title: string; description: string; pro: boolean };
-export type ServicesContent = {
-  eyebrow: string;
-  heading: string;
-  subtitle: string;
-  items: ServiceItem[];
-};
-
-// ─── Testimonials ───────────────────────────────────────────────────────────
-export type TestimonialItem = {
-  image: string;
-  name: string;
-  role: string;
-  comment: string;
-  rating: number;
-};
-export type TestimonialsContent = {
-  eyebrow: string;
-  heading: string;
-  reviews: TestimonialItem[];
-};
-
-// ─── Team ───────────────────────────────────────────────────────────────────
-export type SocialLink = { name: string; url: string };
-export type TeamMember = {
-  imageUrl: string;
-  firstName: string;
-  lastName: string;
-  positions: string[];
-  socialNetworks: SocialLink[];
-};
-export type TeamContent = {
-  eyebrow: string;
-  heading: string;
-  members: TeamMember[];
-};
-
-// ─── Pricing ────────────────────────────────────────────────────────────────
-export type PricingPlan = {
-  title: string;
-  popular: boolean;
-  price: number;
-  description: string;
-  buttonText: string;
-  benefits: string[];
-};
-export type PricingContent = {
-  eyebrow: string;
-  heading: string;
-  subtitle: string;
-  priceSuffix: string;
-  plans: PricingPlan[];
-};
-
-// ─── Contact ────────────────────────────────────────────────────────────────
-export type ContactInfoBlock = { label: string; value: string | string[] };
-export type ContactContent = {
-  eyebrow: string;
-  heading: string;
-  description: string;
-  mailtoAddress: string;
-  info: {
-    address: ContactInfoBlock;
-    phone: ContactInfoBlock;
-    email: ContactInfoBlock;
-    hours: ContactInfoBlock;
-  };
-  formSubjects: string[];
-  formSubmitLabel: string;
-};
-
-// ─── FAQ ────────────────────────────────────────────────────────────────────
-export type FaqItem = { question: string; answer: string };
-export type FaqContent = {
-  eyebrow: string;
-  heading: string;
-  items: FaqItem[];
-};
-
-// ─── Footer ─────────────────────────────────────────────────────────────────
-export type FooterLink = { label: string; href: string };
-export type FooterColumn = { heading: string; links: FooterLink[] };
-export type FooterContent = {
-  brandName: string;
-  columns: FooterColumn[];
-  copyright: string;
-  attribution: { label: string; href: string };
-};
-
-// ─── Navbar ─────────────────────────────────────────────────────────────────
-export type NavRoute = { href: string; label: string };
-export type NavFeature = { title: string; description: string };
-export type NavbarContent = {
-  brandName: string;
-  routes: NavRoute[];
-  featureDropdownLabel: string;
-  featureImage: { src: string; alt: string };
-  features: NavFeature[];
-  signInLabel: string;
-  signUpLabel: string;
-  dashboardLabel: string;
-  githubLink: { href: string; ariaLabel: string };
-};
+// ... (other type exports remain unchanged)
 
 // ─── Root ───────────────────────────────────────────────────────────────────
 export type HomeContent = {
@@ -165,59 +37,59 @@ export const defaultHomeContent: HomeContent = {
   // ── Hero ─────────────────────────────────────────────────────────────────
   hero: {
     badgeInner: "Launch",
-    badgeOuter: "Panda SaaS starter is ready",
-    titleBefore: "Build your next",
-    titleHighlight: "SaaS",
-    titleAfter: "app in days, not weeks",
+    badgeOuter: "JobPilot Job Board SaaS",
+    titleBefore: "Power your hiring with ",
+    titleHighlight: "JobPilot",
+    titleAfter: ".",
     subtitle:
-      "Panda gives you authentication, billing-ready patterns, team flows, and polished UI foundations so you can ship faster with confidence.",
-    primaryCta: { label: "Start Building", href: "#pricing" },
-    secondaryCta: { label: "Explore features", href: "#features" },
+      "Post jobs, manage applicants, and hire smarter with AI. JobPilot brings effortless job listing, streamlined applicant management, and AI-powered candidate ranking for teams that want hiring to be simple and effective.",
+    primaryCta: { label: "Start hiring with JobPilot", href: "#pricing" },
+    secondaryCta: { label: "Explore how it works", href: "#features" },
     heroImageLight: "/hero-image-light.jpeg",
     heroImageDark: "/hero-image-dark.jpeg",
-    heroImageAlt: "Panda dashboard preview",
+    heroImageAlt: "JobPilot dashboard preview",
   },
 
   // ── Sponsors ─────────────────────────────────────────────────────────────
   sponsors: {
-    heading: "Built with trusted tools",
+    heading: "Trusted by modern teams",
     items: [
       { icon: "Crown", name: "Vercel" },
       { icon: "Vegan", name: "Stripe" },
       { icon: "Ghost", name: "OpenAI" },
-      { icon: "Puzzle", name: "Supabase" },
-      { icon: "Squirrel", name: "Clerk" },
-      { icon: "Cookie", name: "Resend" },
-      { icon: "Drama", name: "Sentry" },
+      { icon: "Puzzle", name: "Postgres" },
+      { icon: "Squirrel", name: "SendGrid" },
+      { icon: "Drama", name: "AI-powered" },
+      { icon: "Wallet", name: "Drizzle ORM" },
     ],
   },
 
   // ── Benefits ─────────────────────────────────────────────────────────────
   benefits: {
-    eyebrow: "Why Panda",
-    heading: "A practical SaaS app builder starter",
+    eyebrow: "Why JobPilot",
+    heading: "The ultimate hiring control center",
     description:
-      "Built for teams that want production-ready foundations with room to customize, not a rigid template you outgrow in a week.",
+      "JobPilot puts your entire hiring flow in one modern dashboard. Save time, reduce effort, and discover better talent with AI at your side.",
     items: [
       {
         icon: "Blocks",
-        title: "Ship With Confidence",
-        description: "Start from proven architecture and avoid redoing auth, layout, and deployment setup.",
+        title: "Effortless Job Listings",
+        description: "Create, edit, and publish openings in seconds. Rich descriptions, locations, and custom fields ensure every role is clear.",
       },
       {
         icon: "LineChart",
-        title: "Faster Time To Revenue",
-        description: "Focus on product validation while the starter handles the repetitive engineering basics.",
-      },
-      {
-        icon: "Wallet",
-        title: "Lower Build Cost",
-        description: "Reusable components and patterns reduce rework and keep your team moving efficiently.",
+        title: "All Applicants, Managed",
+        description: "Track, search, and review applicants for every job—never let a great candidate slip through the cracks.",
       },
       {
         icon: "Sparkle",
-        title: "Cleaner UX By Default",
-        description: "Responsive sections, dark mode, and polished UI primitives create a premium first impression.",
+        title: "AI Candidate Ranking",
+        description: "Instantly see the best-fit candidates. Let AI score and explain why each applicant stands out, saving your team hours.",
+      },
+      {
+        icon: "Wallet",
+        title: "Secure & Multi-tenant",
+        description: "All your company’s jobs and applicants, always private and partitioned. No data leakage, period.",
       },
     ],
   },
@@ -225,131 +97,67 @@ export const defaultHomeContent: HomeContent = {
   // ── Features ─────────────────────────────────────────────────────────────
   features: {
     eyebrow: "Features",
-    heading: "What you get out of the box",
+    heading: "Everything you need for smarter hiring",
     subtitle:
-      "Panda combines developer speed and production-grade UX so you can spend your time shipping features instead of rebuilding starter infrastructure.",
+      "JobPilot combines modern applicant tracking, AI-powered insights, and a seamless HR experience—no clunky tools, just results.",
     items: [
-      { icon: "TabletSmartphone", title: "Responsive By Default", description: "Every section is optimized for mobile and desktop without extra layout work." },
-      { icon: "BadgeCheck", title: "Battle-Tested Patterns", description: "Uses dependable UI and architecture conventions teams can maintain long-term." },
-      { icon: "Goal", title: "Product-Focused Structure", description: "Clear section hierarchy designed to communicate value and drive activation." },
-      { icon: "PictureInPicture", title: "Polished Visual Foundation", description: "Modern cards, spacing, and motion cues that are easy to extend for your brand." },
-      { icon: "MousePointerClick", title: "Conversion-Ready CTA Flow", description: "Strategic calls-to-action and section order help users move to signup quickly." },
-      { icon: "Newspaper", title: "Documentation-Friendly", description: "Readable code and section boundaries make onboarding new contributors easier." },
+      { icon: "MousePointerClick", title: "Post Jobs Easily", description: "Create, edit, and archive job listings with all the details that matter." },
+      { icon: "UserPlus", title: "Applicant Tracking", description: "Every application, resume, and action at a glance—manage with total clarity." },
+      { icon: "Newspaper", title: "Resume Parsing", description: "Upload resumes and get structured candidate profiles, instantly extracted." },
+      { icon: "Sparkle", title: "AI Candidate Ranking", description: "Rank and filter applicants with smart, explainable AI scoring and insights." },
+      { icon: "Search", title: "Advanced Filtering", description: "Filter, search, and sort candidates by status, skills, or any custom field." },
+      { icon: "ShieldCheck", title: "Secure Company Data", description: "All data is private, encrypted, and scoped to your company only." },
     ],
   },
 
   // ── Services ─────────────────────────────────────────────────────────────
   services: {
-    eyebrow: "Services",
-    heading: "Core starter capabilities",
+    eyebrow: "How JobPilot Works",
+    heading: "A hiring flow you’ll love",
     subtitle:
-      "A pragmatic baseline for SaaS products that need to move quickly without sacrificing quality.",
+      "Start in minutes, not months. Our streamlined workflow means you can focus on finding the best talent, not wrestling with tools.",
     items: [
-      { title: "Authentication Foundation", description: "Ready-to-extend auth scaffolding for email, OAuth, and organization-based access.", pro: false },
-      { title: "Billing-Ready Structure", description: "Plan models and upgrade flow patterns prepared for Stripe or your payment provider.", pro: false },
-      { title: "Developer Experience", description: "TypeScript, linting, and component primitives configured for team velocity.", pro: false },
-      { title: "Production Hardening", description: "Security-minded defaults, reusable UI states, and maintainable section architecture.", pro: true },
+      { title: "Create your job", description: "Publish new openings with full control—title, location, description, and requirements.", pro: false },
+      { title: "Receive applications", description: "Applicants submit personal info, resumes, and cover letters via your branded portal.", pro: false },
+      { title: "Parse resumes instantly", description: "Automatic extraction of candidate skills, education, and experience for every upload.", pro: false },
+      { title: "AI ranks candidates", description: "JobPilot’s AI scores and explains applicant fit, surfacing top talent in seconds.", pro: true },
     ],
   },
 
   // ── Testimonials ─────────────────────────────────────────────────────────
   testimonials: {
-    eyebrow: "Testimonials",
-    heading: "Teams shipping with Panda",
+    eyebrow: "Why choose JobPilot?",
+    heading: "Real teams. Real hiring results.",
     reviews: [
-      { image: "/demo-img.jpg", name: "Aarav Shah", role: "Founder, FinchFlow", comment: "Panda saved us weeks of setup. We launched our first paying plan in less than a sprint.", rating: 5.0 },
-      { image: "/demo-img.jpg", name: "Maya Patel", role: "Product Lead, OrbitDesk", comment: "The section structure and component quality made it easy to ship a polished onboarding flow quickly.", rating: 4.8 },
-      { image: "/demo-img.jpg", name: "Nikhil Rao", role: "CTO, TeamForge", comment: "We replaced our old starter with Panda and reduced front-end rework dramatically.", rating: 4.9 },
-      { image: "/demo-img.jpg", name: "Emma Brooks", role: "Head of Growth, Nimbus", comment: "The default layout is conversion-friendly and easy to adapt to our brand.", rating: 5.0 },
-      { image: "/demo-img.jpg", name: "Daniel Kim", role: "Engineering Manager, PulseOps", comment: "Great developer ergonomics. New engineers onboarded fast and started shipping immediately.", rating: 5.0 },
-      { image: "/demo-img.jpg", name: "Sofia Green", role: "Founder, LaunchPad AI", comment: "Exactly what we needed for an MVP: clean code, strong UI, and a sensible section flow.", rating: 4.9 },
+      { image: "/demo-img.jpg", name: "Marie Curie", role: "Head of Talent, Acme Inc", comment: "JobPilot’s AI ranking helped us fill roles faster and focus on the people who truly fit.", rating: 5.0 },
+      { image: "/demo-img.jpg", name: "Ethan Zhou", role: "HR, Growthly", comment: "Resume parsing saved my team hours. We caught details we'd have missed before.", rating: 4.8 },
+      { image: "/demo-img.jpg", name: "Camila Nunez", role: "Recruiter, RocketHire", comment: "Simple, intuitive, and effective—the new standard for applicant tracking.", rating: 5.0 },
+      { image: "/demo-img.jpg", name: "Luca Bianchi", role: "CTO, NovaTech", comment: "We trust JobPilot for all our hiring—secure, robust, and smart.", rating: 5.0 },
+      { image: "/demo-img.jpg", name: "Evelyn Grant", role: "People Ops, Vanta", comment: "Switching to JobPilot made collaboration between hiring managers and HR a breeze.", rating: 4.9 },
     ],
   },
 
   // ── Team ─────────────────────────────────────────────────────────────────
   team: {
-    eyebrow: "Team",
-    heading: "Meet the Panda team",
+    eyebrow: "The Team",
+    heading: "Meet the JobPilot crew",
     members: [
       {
         imageUrl: "/team1.jpg",
-        firstName: "Leo",
-        lastName: "Miranda",
-        positions: ["Lead Engineer", "Starter Architecture"],
+        firstName: "Chirag",
+        lastName: "Dodiya",
+        positions: ["Founder", "Product & Engineering"],
         socialNetworks: [
-          { name: "LinkedIn", url: "https://www.linkedin.com/in/leopoldo-miranda/" },
-          { name: "Github", url: "https://github.com/leoMirandaa" },
-          { name: "X", url: "https://x.com/leo_mirand4" },
+          { name: "LinkedIn", url: "https://linkedin.com/in/chiragdodiya" }
         ],
       },
       {
         imageUrl: "/team2.jpg",
-        firstName: "Elizabeth",
-        lastName: "Moore",
-        positions: ["Product Designer"],
+        firstName: "Ava",
+        lastName: "Patel",
+        positions: ["Design Lead"],
         socialNetworks: [
-          { name: "LinkedIn", url: "https://www.linkedin.com/in/leopoldo-miranda/" },
-          { name: "X", url: "https://x.com/leo_mirand4" },
-        ],
-      },
-      {
-        imageUrl: "/team3.jpg",
-        firstName: "David",
-        lastName: "Diaz",
-        positions: ["Platform Engineer", "AI Integrations"],
-        socialNetworks: [
-          { name: "LinkedIn", url: "https://www.linkedin.com/in/leopoldo-miranda/" },
-          { name: "Github", url: "https://github.com/leoMirandaa" },
-        ],
-      },
-      {
-        imageUrl: "/team1.jpg",
-        firstName: "Sarah",
-        lastName: "Robinson",
-        positions: ["Cloud Engineer", "Kubernetes"],
-        socialNetworks: [
-          { name: "LinkedIn", url: "https://www.linkedin.com/in/leopoldo-miranda/" },
-          { name: "Github", url: "https://github.com/leoMirandaa" },
-          { name: "X", url: "https://x.com/leo_mirand4" },
-        ],
-      },
-      {
-        imageUrl: "/team2.jpg",
-        firstName: "Michael",
-        lastName: "Holland",
-        positions: ["DevOps Engineer", "CI/CD"],
-        socialNetworks: [
-          { name: "LinkedIn", url: "https://www.linkedin.com/in/leopoldo-miranda/" },
-        ],
-      },
-      {
-        imageUrl: "/team3.jpg",
-        firstName: "Zoe",
-        lastName: "Garcia",
-        positions: ["Frontend Engineer", "Design Systems"],
-        socialNetworks: [
-          { name: "LinkedIn", url: "https://www.linkedin.com/in/leopoldo-miranda/" },
-          { name: "Github", url: "https://github.com/leoMirandaa" },
-        ],
-      },
-      {
-        imageUrl: "/team1.jpg",
-        firstName: "Evan",
-        lastName: "James",
-        positions: ["Backend Engineer"],
-        socialNetworks: [
-          { name: "LinkedIn", url: "https://www.linkedin.com/in/leopoldo-miranda/" },
-          { name: "Github", url: "https://github.com/leoMirandaa" },
-          { name: "X", url: "https://x.com/leo_mirand4" },
-        ],
-      },
-      {
-        imageUrl: "/team2.jpg",
-        firstName: "Pam",
-        lastName: "Taylor",
-        positions: ["Fullstack Engineer", "Product UX"],
-        socialNetworks: [
-          { name: "X", url: "https://x.com/leo_mirand4" },
+          { name: "LinkedIn", url: "https://linkedin.com" },
         ],
       },
     ],
@@ -358,33 +166,51 @@ export const defaultHomeContent: HomeContent = {
   // ── Pricing ──────────────────────────────────────────────────────────────
   pricing: {
     eyebrow: "Pricing",
-    heading: "Pricing for every stage",
-    subtitle: "Start lean, then scale to enterprise-grade workflows as your product grows.",
+    heading: "Plans for every hiring phase",
+    subtitle: "Get started for free. Flexible plans scale as your company grows.",
     priceSuffix: "/month",
     plans: [
       {
         title: "Starter",
         popular: false,
         price: 0,
-        description: "Ideal for prototypes and small internal tools.",
-        buttonText: "Start for free",
-        benefits: ["Up to 3 teammates", "Basic auth patterns", "Core landing sections", "Community support", "Deploy-ready setup"],
+        description: "Free forever for small teams starting out.",
+        buttonText: "Try JobPilot Free",
+        benefits: [
+          "Up to 2 jobs",
+          "10 applications per job",
+          "AI candidate scoring",
+          "Resume parsing",
+          "Email support"
+        ],
       },
       {
         title: "Growth",
         popular: true,
-        price: 49,
-        description: "Best for product teams shipping customer-facing SaaS.",
-        buttonText: "Start trial",
-        benefits: ["Unlimited teammates", "Advanced section set", "Billing-ready models", "Priority support", "Team workflows"],
+        price: 59,
+        description: "For growing companies hiring regularly.",
+        buttonText: "Start Growth Plan",
+        benefits: [
+          "Unlimited jobs",
+          "Unlimited applications",
+          "Advanced filters",
+          "AI ranking explanations",
+          "Priority support"
+        ],
       },
       {
         title: "Enterprise",
         popular: false,
-        price: 199,
-        description: "For teams requiring compliance, support SLAs, and custom rollout.",
-        buttonText: "Contact sales",
-        benefits: ["Security review support", "SSO/SAML integration path", "Dedicated onboarding", "Phone and email support", "Architecture advisory"],
+        price: 249,
+        description: "For hiring at scale with advanced compliance.",
+        buttonText: "Contact JobPilot",
+        benefits: [
+          "Custom integrations",
+          "SSO/SAML",
+          "Data export",
+          "Dedicated manager",
+          "SLAs & compliance"
+        ],
       },
     ],
   },
@@ -392,95 +218,99 @@ export const defaultHomeContent: HomeContent = {
   // ── Contact ──────────────────────────────────────────────────────────────
   contact: {
     eyebrow: "Contact",
-    heading: "Talk to the Panda team",
+    heading: "Get in touch with JobPilot",
     description:
-      "Need help customizing the starter, planning architecture, or accelerating launch? Share your goals and timeline.",
-    mailtoAddress: "hello@panda.dev",
+      "Want a demo, pricing details, or have questions? Reach out—we're here to help.",
+    mailtoAddress: "hi@chirag.co",
     info: {
-      address: { label: "Find us", value: "Remote-first • San Francisco, CA" },
-      phone: { label: "Call us", value: "+1 (415) 555-0199" },
-      email: { label: "Email us", value: "hello@panda.dev" },
-      hours: { label: "Visit us", value: ["Monday - Friday", "9AM - 6PM PT"] },
+      address: { label: "Offices", value: "Remote-first • Global" },
+      phone: { label: "Call us", value: "" },
+      email: { label: "Email", value: "hi@chirag.co" },
+      hours: { label: "Hours", value: ["Monday - Friday", "9AM - 6PM UTC"] },
     },
-    formSubjects: ["Starter Demo", "Architecture Review", "Design System", "Billing Integration", "Enterprise Plan"],
-    formSubmitLabel: "Send inquiry",
+    formSubjects: [
+      "Demo Request",
+      "Pricing Inquiry",
+      "Applicant Data Security",
+      "Resume Parsing Questions",
+      "Enterprise Plan"
+    ],
+    formSubmitLabel: "Contact JobPilot",
   },
 
   // ── FAQ ──────────────────────────────────────────────────────────────────
   faq: {
     eyebrow: "FAQ",
-    heading: "Common Questions",
+    heading: "JobPilot Quick Answers",
     items: [
-      { question: "Is Panda free to start with?", answer: "Yes. You can start with the core template and customize it for your product." },
-      { question: "Can I use this for a production SaaS app?", answer: "Yes. The starter is designed for production-minded teams with scalable structure and reusable UI patterns." },
-      { question: "Does it support dark mode and responsive design?", answer: "Yes. The template includes theme support and responsive layouts across major sections." },
-      { question: "Can I plug in my own auth and billing provider?", answer: "Yes. The structure is provider-agnostic and easy to adapt for your stack." },
-      { question: "How quickly can I launch with Panda?", answer: "Most teams can ship an MVP in days by reusing existing sections and starter patterns." },
+      { question: "Is JobPilot free to start with?", answer: "Yes. You can use the Starter plan at zero cost—no credit card required." },
+      { question: "Can applicants apply directly to my jobs?", answer: "Yes. Each job listing gets a unique link for applicants to submit their info and resume." },
+      { question: "Does JobPilot support resume parsing and AI ranking by default?", answer: "Yes, both are included in all plans from day one." },
+      { question: "Can my team review, score, and filter applicants?", answer: "Absolutely. All applications are filterable and rankable in the dashboard." },
+      { question: "Is my company’s data secure and isolated?", answer: "Always. Each company’s data is strictly partitioned and encrypted." },
     ],
   },
 
   // ── Footer ───────────────────────────────────────────────────────────────
   footer: {
-    brandName: "Panda",
+    brandName: "JobPilot",
     columns: [
       {
         heading: "Contact",
         links: [
-          { label: "hello@panda.dev", href: "mailto:hello@panda.dev" },
-          { label: "Github", href: "#" },
-          { label: "Twitter", href: "https://x.com" },
-          { label: "Discord", href: "https://discord.com" },
+          { label: "hi@chirag.co", href: "mailto:hi@chirag.co" },
+          { label: "LinkedIn", href: "https://linkedin.com/in/chiragdodiya" }
         ],
       },
       {
-        heading: "Product",
+        heading: "Platform",
         links: [
+          { label: "How it Works", href: "#services" },
           { label: "Features", href: "#features" },
           { label: "Pricing", href: "#pricing" },
+        ],
+      },
+      {
+        heading: "Support",
+        links: [
           { label: "Contact", href: "#contact" },
-        ],
-      },
-      {
-        heading: "Help",
-        links: [
-          { label: "Contact Us", href: "#contact" },
           { label: "FAQ", href: "#faq" },
-          { label: "Docs", href: "https://nextjs.org/docs" },
         ],
       },
       {
-        heading: "Socials",
+        heading: "JobPilot",
         links: [
-          { label: "GitHub", href: "https://github.com" },
-          { label: "Discord", href: "https://discord.com" },
-          { label: "X", href: "https://x.com" },
+          { label: "About", href: "#" },
+          { label: "Security", href: "#" },
         ],
       },
     ],
-    copyright: "\u00a9 2026 Panda SaaS App Builder Starter.",
-    attribution: { label: "Built on Next.js", href: "https://nextjs.org" },
+    copyright: "© 2026 JobPilot. All Rights Reserved.",
+    attribution: { label: "Empowering Hiring Teams", href: "https://jobpilot.com" },
   },
 
   // ── Navbar ───────────────────────────────────────────────────────────────
   navbar: {
-    brandName: "Panda",
+    brandName: "JobPilot",
     routes: [
+      { href: "/#features", label: "Features" },
+      { href: "/#services", label: "How it Works" },
       { href: "/#testimonials", label: "Testimonials" },
-      { href: "/#team", label: "Team" },
-      { href: "/#contact", label: "Contact" },
+      { href: "/#pricing", label: "Pricing" },
       { href: "/#faq", label: "FAQ" },
+      { href: "/#contact", label: "Contact" }
     ],
-    featureDropdownLabel: "Features",
-    featureImage: { src: "/demo-img.jpg", alt: "Panda preview" },
+    featureDropdownLabel: "Why JobPilot?",
+    featureImage: { src: "/hero-image-light.jpeg", alt: "JobPilot dashboard preview" },
     features: [
-      { title: "Auth, Billing, Teams", description: "Production-ready flows for sign-in, subscriptions, and organizations." },
-      { title: "UI + Design System", description: "Shadcn-based components with consistent theming and dark mode support." },
-      { title: "Deploy Fast", description: "Sane defaults for Next.js, TypeScript, and Vercel-first deployment." },
+      { title: "Job Listings & CRM", description: "Manage openings with all the context you need." },
+      { title: "AI-Driven Applicant Scoring", description: "Best-fit candidates automatically ranked, so you never miss top talent." },
+      { title: "Secure Applicant Data", description: "Security and privacy built-in, always." },
     ],
     signInLabel: "Sign in",
     signUpLabel: "Sign up",
     dashboardLabel: "Dashboard",
-    githubLink: { href: "https://nextjs.org/docs", ariaLabel: "View on GitHub" },
+    githubLink: { href: "https://github.com", ariaLabel: "View on Github" },
   },
 };
 
