@@ -1,5 +1,7 @@
-import { pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uniqueIndex, integer, json } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
+
+// Existing tables...
 
 export const users = pgTable("users", {
   id: text("id")
@@ -94,4 +96,38 @@ export const featureItems = pgTable("feature_items", {
   updatedAt: timestamp("updated_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
+});
+
+// --------------------------
+// JobPilot: Jobs + Applicants
+// --------------------------
+export const jobs = pgTable("jobs", {
+  id: text("id").notNull().default(sql`gen_random_uuid()`).primaryKey(),
+  teamId: text("team_id").notNull().references(() => teams.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  location: text("location").notNull(),
+  department: text("department").notNull(),
+  status: text("status").notNull().default("open"), // open | closed | archived
+  postedAt: timestamp("posted_at", { withTimezone: true }).notNull().defaultNow(),
+  closedAt: timestamp("closed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const applications = pgTable("applications", {
+  id: text("id").notNull().default(sql`gen_random_uuid()`).primaryKey(),
+  jobId: text("job_id").notNull().references(() => jobs.id, { onDelete: "cascade" }),
+  teamId: text("team_id").notNull().references(() => teams.id, { onDelete: "cascade" }),
+  applicantName: text("applicant_name").notNull(),
+  applicantEmail: text("applicant_email").notNull(),
+  applicantPhone: text("applicant_phone"),
+  resumeUrl: text("resume_url"), // File storage link
+  coverLetter: text("cover_letter"),
+  parsedResume: json("parsed_resume"), // {skills:[], education:[], experience:[], ...}
+  aiScore: integer("ai_score"), // 0-100
+  aiRationale: text("ai_rationale"),
+  status: text("status").notNull().default("submitted"), // submitted | inreview | rejected | accepted | archived
+  submittedAt: timestamp("submitted_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
