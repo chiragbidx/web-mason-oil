@@ -16,11 +16,18 @@ interface Applicant {
   aiRationale?: string;
 }
 
-interface ApplicantsClientProps {
-  applications: Applicant[];
+interface JobSummary {
+  id: string;
+  title: string;
+  status: string;
 }
 
-export default function ApplicantsClient({ applications }: ApplicantsClientProps) {
+interface ApplicantsClientProps {
+  applications: Applicant[];
+  jobs: JobSummary[];
+}
+
+export default function ApplicantsClient({ applications, jobs }: ApplicantsClientProps) {
   const [focusApplicant, setFocusApplicant] = useState<Applicant | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -147,14 +154,26 @@ export default function ApplicantsClient({ applications }: ApplicantsClientProps
           >
             <h2 className="text-xl font-bold mb-4">Add Applicant</h2>
             <div className="mb-3">
-              <label className="block mb-1 font-medium">Job ID</label>
-              <Input
+              <label className="block mb-1 font-medium">Job</label>
+              <select
+                className="w-full rounded border bg-background px-3 py-2"
                 value={fields.jobId || ""}
                 onChange={(e) => onFieldChange("jobId", e.target.value)}
                 required
                 disabled={isPending}
-                placeholder="Job ID"
-              />
+              >
+                <option value="" disabled>Select a job…</option>
+                {jobs.length === 0 && (
+                  <option value="" disabled>
+                    No jobs available
+                  </option>
+                )}
+                {jobs.map((job) => (
+                  <option key={job.id} value={job.id} disabled={job.status === "archived"}>
+                    {job.title} {job.status !== "open" ? `(${job.status})` : ""}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="mb-3">
               <label className="block mb-1 font-medium">Applicant Name</label>
