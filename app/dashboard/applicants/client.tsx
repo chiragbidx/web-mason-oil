@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { createApplicantAction } from "./actions";
 
 interface Applicant {
   id: string;
@@ -20,20 +21,79 @@ interface ApplicantsClientProps {
 
 export default function ApplicantsClient({ applications }: ApplicantsClientProps) {
   const [focusApplicant, setFocusApplicant] = useState<Applicant | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const [list, setList] = useState(applications);
+
+  // Form fields
+  const [fields, setFields] = useState<Partial<Applicant & { jobId: string }>>({});
+
+  // Modal open
+  const openCreate = () => {
+    setFields({});
+    setFormError(null);
+    setShowForm(true);
+  };
+
+  // Controlled input
+  const onFieldChange = (field: string, value: string) => {
+    setFields((prev) => ({ ...prev, [field]: value }));
+  };
+
+  // Submit applicant
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormError(null);
+    startTransition(async () => {
+      try {
+        const { applicantName, applicantEmail, jobId } = fields;
+        if (!applicantName || !applicantEmail || !jobId) {
+          setFormError("Name, email, and job are required.");
+          return;
+        }
+        const resp = await createApplicantAction({
+          jobId,
+          applicantName,
+          applicantEmail,
+          applicantPhone: fields.applicantPhone || undefined,
+          coverLetter: "",
+          resumeUrl: "",
+        });
+        if (!resp?.success) throw new Error("Failed to add applicant.");
+        setList((prev) => [
+          ...prev,
+          {
+            id: resp.applicationId || Math.random().toString(),
+            applicantName,
+            applicantEmail,
+            applicantPhone: fields.applicantPhone ?? "",
+            status: "submitted",
+          },
+        ]);
+        setShowForm(false);
+        setFields({});
+        setFormError(null);
+      } catch (err: any) {
+        setFormError(err.message || "Something went wrong.");
+      }
+    });
+  };
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Applicants</h1>
+        <Button onClick={openCreate}>Add Applicant</Button>
       </div>
       <Separator className="mb-6" />
-      {applications.length === 0 ? (
+      {list.length === 0 ? (
         <p className="py-16 text-center text-muted-foreground">
           No applications yet. Once applicants start applying to jobs, they’ll appear here.
         </p>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {applications.map((a) => (
+          {list.map((a) => (
             <div
               key={a.id}
               className="bg-card rounded-lg border shadow px-5 py-4 cursor-pointer transition hover:shadow-lg"
@@ -74,6 +134,65 @@ export default function ApplicantsClient({ applications }: ApplicantsClientProps
               <Button variant="secondary" onClick={() => setFocusApplicant(null)}>Close</Button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Modal for creating a new applicant */}
+      {showForm && (
+        <div className="fixed inset-0 flex items-center justify-center bg-background/70 z-50">
+          <form
+            className="bg-card rounded-lg shadow-lg p-6 min-w-[330px] max-w-sm"
+            onSubmit={handleSubmit}
+          >
+            <h2 className="text-xl font-bold mb-4">Add Applicant</h2>
+            <div className="mb-3">
+              <label className="block mb-1 font-medium">Job ID</label>
+              <Input
+                value={fields.jobId || ""}
+                onChange={(e) => onFieldChange("jobId", e.target.value)}
+                required
+                disabled={isPending}
+                placeholder="Job ID"
+              />
+            </div>
+            <div className="mb-3">
+              <label className="block mb-1 font-medium">Applicant Name</label>
+              <Input
+                value={fields.applicantName || ""}
+                onChange={(e) => onFieldChange("applicantName", e.target.value)}
+                required
+                disabled={isPending}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="block mb-1 font-medium">Applicant Email</label>
+              <Input
+                value={fields.applicantEmail || ""}
+                onChange={(e) => onFieldChange("applicantEmail", e.target.value)}
+                required
+                disabled={isPending}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="block mb-1 font-medium">Applicant Phone</label>
+              <Input
+                value={fields.applicantPhone || ""}
+                onChange={(e) => onFieldChange("applicantPhone", e.target.value)}
+                disabled={isPending}
+              />
+            </div>
+            {formError && (
+              <div className="py-1 text-destructive text-sm mb-2">{formError}</div>
+            )}
+            <div className="flex justify-end gap-2 mt-6">
+              <Button type="button" variant="ghost" onClick={() => setShowForm(false)} disabled={isPending}>
+                Cancel
+              </Button>
+              <Button type="submit" disabled={isPending}>
+                {isPending ? "Saving..." : "Add"}
+              </Button>
+            </div>
+          </form>
         </div>
       )}
     </div>
