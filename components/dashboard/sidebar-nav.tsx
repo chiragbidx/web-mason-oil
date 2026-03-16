@@ -6,12 +6,11 @@ import { usePathname } from "next/navigation";
 import {
   ChevronDown,
   Home,
-  Hammer,
+  Briefcase,
+  User,
   Settings,
   Users,
   CreditCard,
-  Briefcase,
-  User,
 } from "lucide-react";
 import {
   Collapsible,
