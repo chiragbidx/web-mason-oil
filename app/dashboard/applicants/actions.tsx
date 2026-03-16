@@ -4,7 +4,7 @@ import { z } from "zod";
 import { db } from "@/lib/db/client";
 import { applications, jobs } from "@/lib/db/schema";
 import { getAuthSession } from "@/lib/auth/session";
-import { eq } from "drizzle-orm";
+import { and, eq, ne } from "drizzle-orm";
 
 // Applicant create schema - linked to a job
 const applicantSchema = z.object({
@@ -20,10 +20,19 @@ export async function createApplicantAction(input: z.infer<typeof applicantSchem
   const session = await getAuthSession();
   if (!session) throw new Error("Not authenticated");
 
-  // Job validation and team check (enforce multi-tenant)
-  const jobResult = await db.select().from(jobs).where(eq(jobs.id, input.jobId));
+  // Job validation: must be for this team AND status === open
+  const jobResult = await db
+    .select()
+    .from(jobs)
+    .where(
+      and(
+        eq(jobs.id, input.jobId),
+        ne(jobs.status, "archived"),
+        eq(jobs.status, "open")
+      )
+    );
   const job = jobResult[0];
-  if (!job) throw new Error("Invalid job selected");
+  if (!job) throw new Error("Invalid job selected or job is not open");
 
   const insertRes = await db.insert(applications).values({
     ...input,
